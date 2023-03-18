@@ -1,0 +1,113 @@
+commit f5f77f30e4190adb06be560269239877bfee7d48
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 19:25:18 2023 +0200
+
+    poistettiin 1, vaihdettiin 2 nimeä -> 22 :)
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit ef65c6fcfd4260e4266ebf14db1eaa200f1718cc
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 19:17:18 2023 +0200
+
+    tehtiin hakemisto tiedostot ja sinne kolme tiedostoa :)
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d0d0a14f10682bc777420d5e8f949ab9052e095f
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 18:53:10 2023 +0200
+
+    muutettiin ekan ja kolmannen sisältöä kattavemmiksi
+
+ eka.txt    | 5 +++--
+ kolmas.txt | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+commit 374f13d995b6fe35d0e41dd192f924407b687ee3
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 18:49:52 2023 +0200
+
+    vaihdettiin tiedoston nimi ekaksi :)
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 8e16945d5531ce9e1cc979ceb6ba9337ad8fd265
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 18:46:37 2023 +0200
+
+    poistettiin toinen
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 6ee7c0f2ea9c80edc42c5cfeb4386a0aeca0b772
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 18:40:15 2023 +0200
+
+    lisättiin filosofista pohdintaa tiedostoon
+
+ tiedosto.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit c337da600d2e5442bd2dd6aaef568c7f2acfb09d
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 18:37:23 2023 +0200
+
+    lisättiin tiedostoon HLH
+
+ tiedosto.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 83cc119bb2f3e858e0b575c1320a0140a83539f7
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 17:47:31 2023 +0200
+
+    tein stuff-hakemiston ja sinne hiivatin sisälle :D
+
+ stuff/hiivatti.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 2d1e3a25efa75dd87f6ea03bd1aeb53cb2e1f06c
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 17:45:48 2023 +0200
+
+    kirjotin toisee ja kolmantee kultaa :D
+
+ kolmas.txt | 2 ++
+ toinen.txt | 1 +
+ 2 files changed, 3 insertions(+)
+
+commit 2ec9e1f96ce3228157cd803ba7ac3145c8f50d53
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 17:43:35 2023 +0200
+
+    tein kolmannenki :D
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 7567ff65fc7f0436807a3ae8cc939f9a070c4585
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 17:37:31 2023 +0200
+
+    muutos ja lisäys :D
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 7dff6addcec70971ed8cb28d9e35246d5a524f11
+Author: smausquared <samu.ayhynmaki@gmail.com>
+Date:   Wed Mar 15 17:31:48 2023 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
