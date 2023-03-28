@@ -8,6 +8,7 @@
 [vaatimusmaarittely.md](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [tuntikirjanpito.md]()
+
 Jipii ! :)
 
 prämprääääm :D pämprärärärärämppämppääääm :D päräräm prämpräm :)
