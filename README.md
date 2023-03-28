@@ -5,7 +5,7 @@
 
 [gitlog.txt](https://github.com/smausquared/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
 
-[vaatimusmaarittely.md]()
+[vaatimusmaarittely.md](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 Jipii ! :)
 
