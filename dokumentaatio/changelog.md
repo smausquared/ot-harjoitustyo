@@ -1,5 +1,7 @@
 ## Viikko 3
 
+-Alustettiin poetry, riippuvuudet
+
 -Lisätty 2D-ympäristö
 
 -Lisätty Ghost-luokka, joka mallintaa pelin pelaajaa
