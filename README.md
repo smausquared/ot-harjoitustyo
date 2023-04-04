@@ -7,3 +7,5 @@
 [vaatimusmaarittely.md](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [tuntikirjanpito.md](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+
+Kummitus-kuvan tehnyt [Erkki Rytkönen](twitter.com/finnytalks)
