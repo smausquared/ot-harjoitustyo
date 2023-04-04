@@ -1,4 +1,4 @@
-# Ghost game
+# Kummituspeli
 
 ## Dokumentaatio
 
