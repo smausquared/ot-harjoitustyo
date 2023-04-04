@@ -10,4 +10,4 @@
 
 [changelog.md](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
-Kummitus-kuvan tehnyt [Erkki Rytkönen](twitter.com/finnytalks)
+Kummitus-kuvan tehnyt Erkki Rytkönen, Twitter @finnytalks
