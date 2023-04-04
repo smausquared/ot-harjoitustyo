@@ -1,8 +1,4 @@
-# Ohte-Harjoitustyö
-
-[komentorivi.txt](https://github.com/smausquared/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-
-[gitlog.txt](https://github.com/smausquared/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+# Ghost game
 
 [vaatimusmaarittely.md](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
