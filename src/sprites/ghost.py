@@ -1,5 +1,4 @@
 import pygame
-
 class Ghost(pygame.sprite.Sprite):
     def __init__(self, x, y, speed): # pylint: disable=invalid-name
         super().__init__()
