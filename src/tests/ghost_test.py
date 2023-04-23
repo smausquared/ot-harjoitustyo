@@ -1,12 +1,12 @@
 import unittest
-import pygame
-from sprites import ghost
+from src.sprites.ghost import Ghost
+
 
 class TestMoving(unittest.TestCase):
     def setUp(self):
-        s = ghost.Ghost(150,630,1)
+        pass
 
     def test_moving_works(self):
-        s = ghost.Ghost(150,630,1)
-        s.move(True,False)
-        self.assertEqual(151,s.rect.center[0])
+        test_ghost = Ghost(150, 630, 1)
+        test_ghost.move(True, False)
+        self.assertEqual(151, test_ghost.rect.center[0])
