@@ -8,4 +8,6 @@
 
 [Changelog](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
+[Arkkitehtuurikuvaus](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 Kummitus-kuvaa käytetään tekijän Erkki Rytkönen luvalla, Twitter @finnytalks
