@@ -13,10 +13,10 @@ Käyttäjää on tarve luoda peliä varten vain yhtä sorttia: normaali pelaaja.
 ## Perusversion toiminnallisuus
 
 -Ruudulla on hahmo 2D-ympäristössä, jossa voi liikkua oikealle ja vasemmalle
-sekä hyppiä
+sekä hyppiä : tehty
 
 -Hahmo liikkuu aluksi hyvin hitaasti, mutta kerää nopeutta kerätessään
-esineitä ympäristöstä
+esineitä ympäristöstä : tehty
 
 -Ympäristössä liikkuu yksinkertaisia vihollisia
 
