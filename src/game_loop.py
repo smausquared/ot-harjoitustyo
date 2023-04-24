@@ -1,5 +1,5 @@
 import pygame
-class Gameloop:
+class Gameloop: # gameloop handles rendering for now: perhaps #TODO renderer?
     def __init__(self, ghost, level, screen, clock):
         self.ghost = ghost
         self.level = level
@@ -18,11 +18,11 @@ class Gameloop:
             self.screen.fill((173, 216, 230))
             if self.ghost.alive:
                 self.ghost.move(self.right, self.left)
-            for spoon in self.level.spoon_group:
+            for spoon in self.level.spoon_group: # draw spoons
                 spoon.draw(self.screen)
                 spoon.update(self.ghost)
-            self.ghost.update()
-            self.screen.blit(pygame.transform.flip(self.ghost.image,
+            self.ghost.update() # decrease speed over time
+            self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
                 self.ghost.flip, False), self.ghost.rect)
 
             for event in pygame.event.get():
