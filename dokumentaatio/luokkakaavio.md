@@ -26,7 +26,7 @@ classDiagram
             rect
             rect.center
         }
-        class gameloop{
+        class Gameloop{
         ghost
         level
         right

@@ -15,6 +15,5 @@ class Spoon(pygame.sprite.Sprite): # spoons increase the player's speed
 
     def update(self, ghost):
         if pygame.sprite.collide_rect(self, ghost):
-            ghost.speed_x += 2
+            ghost.speed_x += 2.5
             self.kill()
-        

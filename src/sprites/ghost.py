@@ -48,7 +48,7 @@ class Ghost(pygame.sprite.Sprite):
                       # but decrease back to 1 over time
         decrease_cooldown = 100
         if self.speed_x > 1 and self.timer >= decrease_cooldown:
-            self.speed_x *= 0.9
+            self.speed_x *= 0.93
             self.timer = 0
             if self.speed_x <= 1.5:
                 self.speed_x = 1
