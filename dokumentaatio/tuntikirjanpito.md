@@ -8,4 +8,5 @@
 |       |      | yksinkertaiseen ongelmaan joka esti kehityksen jatkumista
 | 23.4. |   7  | Sovelluslogiikan parannus, kerättävien lusikoiden lisäys, hyppiminen, painovoima
 | 24.4. |   7  | Docstring-eheys, dokumentaatio, tason piirto, törmäys
-| 25.4. |   2  | Käyttöohje, release 1
+| 25.4. |   3  | Käyttöohje, release 1, testien laajennus
+| summa | 21.5 |
