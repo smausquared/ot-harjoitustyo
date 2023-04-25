@@ -1,6 +1,5 @@
 import pygame
-
-# large-ish problem: I got the level collision working, but
+# large-ish bug: I got the level collision working, but
 # moving along the ground seems slower than jumping through the air.
 # not sure what's causing it, but I'm aware of the issue...
 

@@ -19,3 +19,14 @@
 -Kummitus voi kerätä lusikoita, jotka kasvattavat sen nopeutta
 
 -Koodin Pylint-optimointi
+
+## Viikko 5
+
+-Assets-hakemistossa kartta ja maan tekstuurit
+
+-level.txt-tiedostojen tulkki ja piirtäjä
+
+-Yksinkertainen pelitaso testausta varten: kehitettävä tason scrollaus eteen- ja taaksepäin!
+
+-Pelaajan törmäys maan ja seinien kanssa
+
