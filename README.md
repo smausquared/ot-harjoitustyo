@@ -14,6 +14,8 @@ Kummitus-kuvaa käytetään tekijän Erkki Rytkönen luvalla, Twitter @finnytalk
 
 ## Asennus
 
+**Huom!** Tietokoneellasi täytyy olla poetry asennettuna, jotta asennus onnistuu!
+
 1. Lataa uusin release ja pura zip-tiedosto
 
 2. Navigoi komentorivillä purkamaasi kansioon "ot-harjoitustyo"
