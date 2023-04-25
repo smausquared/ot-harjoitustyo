@@ -12,9 +12,9 @@ class Level:
         self.obstacle_list = [] # testing collision with the sprite group proved inefficient
     def process_map_data(self, path):
         try:
-            f = open(f'{path}{self.level}.txt','r')
+            f = open(f'{path}{self.level}.txt',encoding="utf-8")
         except FileNotFoundError:
-            f = open(f'src/{path}{self.level}.txt','r')
+            f = open(f'src/{path}{self.level}.txt',encoding="utf-8")
         data = f.read()
         f.close()
         data = data.split('\n')
