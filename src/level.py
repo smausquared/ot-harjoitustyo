@@ -11,7 +11,10 @@ class Level:
         self.obstacle_group = pygame.sprite.Group()
         self.obstacle_list = [] # testing collision with the sprite group proved inefficient
     def process_map_data(self, path):
-        f = open(f'{path}{self.level}.txt','r')
+        try:
+            f = open(f'{path}{self.level}.txt','r')
+        except FileNotFoundError:
+            f = open(f'src/{path}{self.level}.txt','r')
         data = f.read()
         f.close()
         data = data.split('\n')
