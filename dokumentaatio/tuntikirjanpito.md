@@ -9,5 +9,5 @@
 | 23.4. |   7  | Sovelluslogiikan parannus, kerättävien lusikoiden lisäys, hyppiminen, painovoima
 | 24.4. |   7  | Kommenttien eheys, dokumentaatio, tason piirto, törmäys
 | 25.4. |   3  | Käyttöohje, release 1, testien laajennus
-| 2.5.  |   5  | Debug, tason scrollaus sivuille
-| summa | 25.5 |
+| 2.5.  |   7  | Debug, tason scrollaus sivuille, testit, docstring
+| summa | 28.5 |

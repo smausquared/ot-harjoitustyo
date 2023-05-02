@@ -30,3 +30,10 @@
 
 -Pelaajan törmäys maan ja seinien kanssa
 
+## Viikko 6
+
+-Lisättiin tason sivusuuntainen scrollaus oikealle ja vasemmalle
+
+-Korjattiin bugi, joka aiheutti hitaan liikkumisen maata vasten
+
+-Testien laajennus

@@ -1,20 +1,43 @@
 import pygame
-# large-ish bug: I got the level collision working, but
-# moving along the ground seems slower than jumping through the air.
 
-class Ghost(pygame.sprite.Sprite): # player character
-    def __init__(self, x, y, speed): # pylint: disable=invalid-name
+
+class Ghost(pygame.sprite.Sprite):
+    """Class to represent the player character.
+
+    Attributes:
+        image: Image of the ghost.
+        alive: For keeping track whether the player is alive.
+        timer: Timer for the update-method.
+        flip: Attribute for flipping the player's image based on movement direction.
+        scroll_area: Attribute for determining how far near the edges the player 
+        has to move before the stage starts scrolling.
+        speed_x: The horizontal speed of the player.
+        speed_y: The vertical speed of the player.
+        jumping: Tracking if the player is jumping.
+        in_air: Tracking if the player is in the air.
+        rect: Rectangle for checking collision with everything in the stage.
+        rect.center: Center of the collision rectangle.
+    """
+
+    def __init__(self, x, y, speed):  # pylint: disable=invalid-name
+        """Constructor of the class.
+
+        Args:
+            x: X-coordinate of the player.
+            y: Y-coordinate of the player.
+            speed: The player's speed.
+        """
         super().__init__()
         try:
             ghost = pygame.image.load("src/assets/erkkikummitus.png")
         except FileNotFoundError:
             ghost = pygame.image.load("assets/erkkikummitus.png")
         self.image = pygame.transform.scale(ghost,
-                                        (int(0.7*ghost.get_width()),
-                                         int(0.7*ghost.get_height())))
+                                            (int(0.7*ghost.get_width()),
+                                             int(0.7*ghost.get_height())))
         self.alive = True
-        self.timer = 0 # for speed decay cooldown
-        self.flip = False # flipping character direction based on movement
+        self.timer = 0  # for speed decay cooldown
+        self.flip = False  # flipping character direction based on movement
         self.scroll_area = 450
         self.speed_x = speed
         self.speed_y = 0
@@ -23,7 +46,17 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
-    def move(self, right, left, level):  # handle movement of player
+    def move(self, right, left, level):
+        """Method for handling player movement, checking collision and tracking scrolling.
+
+        Args:
+            right: If the input dictates that right movement shall commence.
+            left: If the input dictates that left movement shall commence.
+            level: The game level.
+
+        Returns:
+            integer: How much the level objects should scroll based on the player's movement. 
+        """
         screen_scroll = 0
         delta_x = 0
         delta_y = 0
@@ -37,8 +70,8 @@ class Ghost(pygame.sprite.Sprite): # player character
         if self.jumping and not self.in_air:
             self.speed_y = -17
             self.jumping = False
-            self.in_air = True # prevent jumping in air
-        self.speed_y += 0.68 # gravity
+            self.in_air = True  # prevent jumping in air
+        self.speed_y += 0.68  # gravity
         self.speed_y = min(self.speed_y, 25)  # terminal velocity
         delta_y += self.speed_y
 
@@ -53,28 +86,40 @@ class Ghost(pygame.sprite.Sprite): # player character
 
         return screen_scroll
 
-    def update(self):  # I want the ghost's speed to increase from spoon pickups,
-        # but decrease back to 1 over time
+    def update(self):
+        """Method for updating the player's speed over time.
+        """
         decrease_cooldown = 100
         if self.speed_x > 1 and self.timer >= decrease_cooldown:
             self.speed_x *= 0.93
             self.timer = 0
-            if self.speed_x <= 1.5: # making sure speed can't get lower than 1
+            if self.speed_x <= 1.5:  # making sure speed can't get lower than 1
                 self.speed_x = 1
         self.timer += 1
 
     def check_collision(self, delta_x, delta_y, level):
+        """Method for checking the player's collision with the level.
+
+        Args:
+            delta_x: Distance of how far the character would wish to move horizontally.
+            delta_y: Distance of how far the character would wish to move vertically.
+            level: The game level.
+
+        Returns:
+            integer: The delta_x and delta_y-values modified so that if the
+            movement approaches a wall, the movement is cut short.
+        """
         for tile in level.obstacle_group:
             if tile.rect.colliderect(self.rect.x + delta_x, self.rect.y,
-                                     self.rect.width, self.rect.height): # x
+                                     self.rect.width, self.rect.height):  # x
                 delta_x = 0
             if tile.rect.colliderect(self.rect.x, self.rect.y + delta_y,
-                                     self.rect.width, self.rect.height): # y
-                if self.speed_y < 0: # for bumping thy head upon the dastardly roof
+                                     self.rect.width, self.rect.height):  # y
+                if self.speed_y < 0:  # for bumping thy head upon the dastardly roof
                     self.speed_y = 0
                     delta_y = tile.rect.bottom - self.rect.top
 
-                elif self.speed_y >= 0: # for planting thy feet on the ground
+                elif self.speed_y >= 0:  # for planting thy feet on the ground
                     self.speed_y = 0
                     self.in_air = False
                     delta_y = tile.rect.top - self.rect.bottom - 0.68

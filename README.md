@@ -29,3 +29,30 @@ poetry install
 ```bash
 poetry run invoke start
 ```
+
+## Komennot
+
+Ohjelman ajo:
+
+```bash
+poetry run invoke start
+```
+
+~~Testien ajo~~ rikki, coverage ajaa testit toimivasti:
+
+```bash
+poetry run invoke test
+```
+
+Testaaminen ja testikattavuusraportin luonti index.html-tiedostoon:
+
+```bash
+poetry run invoke coverage-report
+```
+
+Pylint-virheiden tarkistus:
+
+```bash
+poetry run invoke lint
+```
+
