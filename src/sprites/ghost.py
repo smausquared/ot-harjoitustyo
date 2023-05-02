@@ -47,7 +47,7 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.rect.x += delta_x
         self.rect.y += delta_y
 
-        if self.rect.right > 1280 - self.scroll_area or self.rect.left < self.scroll_area:
+        if self.rect.right > 1280 - self.scroll_area or self.rect.left <= self.scroll_area:
             self.rect.x -= delta_x
             screen_scroll = -delta_x
 
