@@ -1,7 +1,6 @@
 import pygame
 # large-ish bug: I got the level collision working, but
 # moving along the ground seems slower than jumping through the air.
-# not sure what's causing it, but I'm aware of the issue...
 
 class Ghost(pygame.sprite.Sprite): # player character
     def __init__(self, x, y, speed): # pylint: disable=invalid-name
@@ -16,6 +15,8 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.alive = True
         self.timer = 0 # for speed decay cooldown
         self.flip = False # flipping character direction based on movement
+        self.scroll = 0
+        self.scroll_area = 200
         self.speed_x = speed
         self.speed_y = 0
         self.jumping = False
@@ -23,7 +24,7 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
-    def move(self, right, left, obstacles):  # handle movement of player
+    def move(self, right, left, level):  # handle movement of player
         delta_x = 0
         delta_y = 0
         if right:
@@ -41,7 +42,7 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.speed_y = min(self.speed_y, 25)  # terminal velocity
         delta_y += self.speed_y
 
-        delta_x, delta_y = self.check_collision(delta_x, delta_y, obstacles)
+        delta_x, delta_y = self.check_collision(delta_x, delta_y, level)
 
         self.rect.x += delta_x
         self.rect.y += delta_y
@@ -56,8 +57,8 @@ class Ghost(pygame.sprite.Sprite): # player character
                 self.speed_x = 1
         self.timer += 1
 
-    def check_collision(self, delta_x, delta_y, obstacles):
-        for tile in obstacles:
+    def check_collision(self, delta_x, delta_y, level):
+        for tile in level.obstacle_group:
             if tile.rect.colliderect(self.rect.x + delta_x, self.rect.y,
                                      self.rect.width, self.rect.height): # x
                 delta_x = 0
@@ -69,6 +70,7 @@ class Ghost(pygame.sprite.Sprite): # player character
 
                 elif self.speed_y >= 0: # for planting thy feet on the ground
                     self.speed_y = 0
-                    delta_y = tile.rect.top - self.rect.bottom
                     self.in_air = False
+                    delta_y = tile.rect.top - self.rect.bottom - 0.68
+
         return delta_x, delta_y

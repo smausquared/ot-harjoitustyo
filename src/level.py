@@ -7,16 +7,18 @@ TILESIZE = 64
 class Level:
     def __init__(self, level): # temporary placings of spoons onto the level
         self.level = level
+        self.scroll_area = 200
+        self.scroll = 0
         self.spoon_group = pygame.sprite.Group()
         self.obstacle_group = pygame.sprite.Group()
         self.obstacle_list = [] # testing collision with the sprite group proved inefficient
     def process_map_data(self, path):
         try:
-            f = open(f'{path}{self.level}.txt',encoding="utf-8")
+            file = open(f'{path}{self.level}.txt',encoding="utf-8")
         except FileNotFoundError:
-            f = open(f'src/{path}{self.level}.txt',encoding="utf-8")
-        data = f.read()
-        f.close()
+            file = open(f'src/{path}{self.level}.txt',encoding="utf-8")
+        data = file.read()
+        file.close()
         data = data.split('\n')
         game_map = []
         for row in data:
@@ -36,7 +38,7 @@ class Level:
 
     def establish_groups(self):
         map_data = self.process_map_data("assets/level")
-        for y in range(len(map_data)): # I don't know what that means, dearest pylint!
+        for y in range(len(map_data)): # I don't know what that means, pylint!
             for x in range(len(map_data[y])):
                 if int(map_data[y][x])>0:
                     if map_data[y][x] == "1":

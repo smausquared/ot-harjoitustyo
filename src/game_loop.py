@@ -19,7 +19,7 @@ class Gameloop: # gameloop handles rendering for now: perhaps #TODO renderer?
             self.clock.tick(60)
             self.screen.fill((173, 216, 230))
             if self.ghost.alive:
-                self.ghost.move(self.right, self.left, self.level.obstacle_group)
+                self.ghost.move(self.right, self.left, self.level)
             for spoon in self.level.spoon_group: # draw spoons and check pickup
                 spoon.draw(self.screen)
                 spoon.update(self.ghost)
