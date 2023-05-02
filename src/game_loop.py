@@ -19,12 +19,10 @@ class Gameloop: # gameloop handles rendering for now: perhaps #TODO renderer?
             self.clock.tick(60)
             self.screen.fill((173, 216, 230))
             if self.ghost.alive:
-                self.ghost.move(self.right, self.left, self.level)
-            for spoon in self.level.spoon_group: # draw spoons and check pickup
-                spoon.draw(self.screen)
+                self.level.scroll = self.ghost.move(self.right, self.left, self.level)
+            self.level.draw_level(self.screen)
+            for spoon in self.level.spoon_group: # check spoon pickup
                 spoon.update(self.ghost)
-            for tile in self.level.obstacle_group:
-                tile.draw(self.screen)
             self.ghost.update() # decrease speed over time
             self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
                 self.ghost.flip, False), self.ghost.rect)

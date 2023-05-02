@@ -7,11 +7,11 @@ TILESIZE = 64
 class Level:
     def __init__(self, level): # temporary placings of spoons onto the level
         self.level = level
-        self.scroll_area = 200
         self.scroll = 0
         self.spoon_group = pygame.sprite.Group()
         self.obstacle_group = pygame.sprite.Group()
-        self.obstacle_list = [] # testing collision with the sprite group proved inefficient
+        self.everything_group = pygame.sprite.Group()
+
     def process_map_data(self, path):
         try:
             file = open(f'{path}{self.level}.txt',encoding="utf-8")
@@ -27,14 +27,19 @@ class Level:
         return game_map
 
     def add_spoon(self,x,y):
-        self.spoon_group.add(Spoon(x*TILESIZE,y*TILESIZE))
+        spoon = Spoon(x*TILESIZE,y*TILESIZE)
+        self.spoon_group.add(spoon)
+        self.everything_group.add(spoon)
 
     def add_dirt(self,x,y):
         dirt = Dirt(x*TILESIZE,y*TILESIZE)
         self.obstacle_group.add(dirt)
-        self.obstacle_list.append(dirt.rect)
+        self.everything_group.add(dirt)
+
     def add_grass(self,x,y):
-        self.obstacle_group.add(Grass(x*TILESIZE,y*TILESIZE))
+        grass = Grass(x*TILESIZE,y*TILESIZE)
+        self.obstacle_group.add(grass)
+        self.everything_group.add(grass)
 
     def establish_groups(self):
         map_data = self.process_map_data("assets/level")
@@ -47,3 +52,8 @@ class Level:
                         self.add_dirt(x,y)
                     elif map_data[y][x] == "3":
                         self.add_spoon(x,y)
+
+    def draw_level(self, screen):
+        for thing in self.everything_group:
+            thing.rect.x += self.scroll
+            screen.blit(thing.image, (thing.rect.x, thing.rect.y))

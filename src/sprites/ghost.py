@@ -15,8 +15,7 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.alive = True
         self.timer = 0 # for speed decay cooldown
         self.flip = False # flipping character direction based on movement
-        self.scroll = 0
-        self.scroll_area = 200
+        self.scroll_area = 450
         self.speed_x = speed
         self.speed_y = 0
         self.jumping = False
@@ -25,6 +24,7 @@ class Ghost(pygame.sprite.Sprite): # player character
         self.rect.center = (x, y)
 
     def move(self, right, left, level):  # handle movement of player
+        screen_scroll = 0
         delta_x = 0
         delta_y = 0
         if right:
@@ -46,6 +46,12 @@ class Ghost(pygame.sprite.Sprite): # player character
 
         self.rect.x += delta_x
         self.rect.y += delta_y
+
+        if self.rect.right > 1280 - self.scroll_area or self.rect.left < self.scroll_area:
+            self.rect.x -= delta_x
+            screen_scroll = -delta_x
+
+        return screen_scroll
 
     def update(self):  # I want the ghost's speed to increase from spoon pickups,
         # but decrease back to 1 over time
