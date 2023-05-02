@@ -1,5 +1,9 @@
 # Kummituspeli
 
+## Kuvaus
+
+Kummituspelissä pelaaja hallitsee kummitusta, joka seikkailee pelitason läpi. Hän voi kerätä 2D-tasosta lusikoita, jotka kasvattavat kummituksen liikenopeutta. Liikkuminen tapahtuu W- A- ja D-näppäimillä. Kun pääset tason uloskäynnille, voitat pelin!
+
 ## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
