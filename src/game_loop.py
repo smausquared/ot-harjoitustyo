@@ -44,13 +44,16 @@ class Gameloop:
             self.screen.fill((173, 216, 230))
 
             if self.ghost.alive:
-                self.level.scroll = self.ghost.move(
+                scroll = self.ghost.move(
                     self.right, self.left, self.level)
+                self.level.scroll_x = scroll[0]
+                self.level.scroll_y = scroll[1]
+
             self.level.draw_level(self.screen)
-            for spoon in self.level.spoon_group:  # check spoon pickup
+            for spoon in self.level.spoon_group: # check spoon pickup
                 spoon.update(self.ghost)
-            self.ghost.update()  # decrease speed over time
-            self.screen.blit(pygame.transform.flip(self.ghost.image,  # draw player
+            self.ghost.update() # decrease speed over time
+            self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
                                                    self.ghost.flip, False), self.ghost.rect)
 
             for event in pygame.event.get():

@@ -9,7 +9,8 @@ TILESIZE = 64
 class Level:
     def __init__(self, level):  # temporary placings of spoons onto the level
         self.level = level
-        self.scroll = 0
+        self.scroll_x = 0
+        self.scroll_y = 0
         self.spoon_group = pygame.sprite.Group()
         self.obstacle_group = pygame.sprite.Group()
         self.everything_group = pygame.sprite.Group()
@@ -57,5 +58,7 @@ class Level:
 
     def draw_level(self, screen):
         for thing in self.everything_group:
-            thing.rect.x += self.scroll
+            thing.rect.x += self.scroll_x
+            thing.rect.y += self.scroll_y
+
             screen.blit(thing.image, (thing.rect.x, thing.rect.y))

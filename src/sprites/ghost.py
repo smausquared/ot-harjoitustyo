@@ -36,8 +36,8 @@ class Ghost(pygame.sprite.Sprite):
                                             (int(0.7*ghost.get_width()),
                                              int(0.7*ghost.get_height())))
         self.alive = True
-        self.timer = 0  # for speed decay cooldown
-        self.flip = False  # flipping character direction based on movement
+        self.timer = 0 # for speed decay cooldown
+        self.flip = False # flipping character direction based on movement
         self.scroll_area = 450
         self.speed_x = speed
         self.speed_y = 0
@@ -57,7 +57,9 @@ class Ghost(pygame.sprite.Sprite):
         Returns:
             integer: How much the level objects should scroll based on the player's movement. 
         """
-        screen_scroll = 0
+        screen_scroll_x = 0
+        screen_scroll_y = 0
+
         delta_x = 0
         delta_y = 0
         if right:
@@ -80,18 +82,24 @@ class Ghost(pygame.sprite.Sprite):
         self.rect.x += delta_x
         self.rect.y += delta_y
 
-        if self.rect.right > 1280 - self.scroll_area or self.rect.left <= self.scroll_area:
+        if self.rect.right > 1280 - self.scroll_area or \
+        self.rect.left <= self.scroll_area: # x scrolling
             self.rect.x -= delta_x
-            screen_scroll = -delta_x
+            screen_scroll_x = -delta_x
 
-        return screen_scroll
+        if self.rect.y + self.rect.height//2 > 600 or \
+            self.rect.y - self.rect.height//2 <= 200: # y scrolling
+            self.rect.y -= delta_y
+            screen_scroll_y = -delta_y
+
+        return (screen_scroll_x, screen_scroll_y)
 
     def update(self):
         """Method for updating the player's speed over time.
         """
         decrease_cooldown = 100
         if self.speed_x > 1 and self.timer >= decrease_cooldown:
-            self.speed_x *= 0.93
+            self.speed_x *= 0.87
             self.timer = 0
             if self.speed_x <= 1.5:  # making sure speed can't get lower than 1
                 self.speed_x = 1
