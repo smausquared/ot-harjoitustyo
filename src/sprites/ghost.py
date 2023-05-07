@@ -82,7 +82,7 @@ class Ghost(pygame.sprite.Sprite):
         self.rect.x += delta_x
         self.rect.y += delta_y
 
-        if self.rect.right > 1280 - self.scroll_area or \
+        if self.rect.right > 1400 - self.scroll_area or \
         self.rect.left <= self.scroll_area: # x scrolling
             self.rect.x -= delta_x
             screen_scroll_x = -delta_x
@@ -99,7 +99,7 @@ class Ghost(pygame.sprite.Sprite):
         """
         decrease_cooldown = 100
         if self.speed_x > 1 and self.timer >= decrease_cooldown:
-            self.speed_x *= 0.87
+            self.speed_x *= 0.9
             self.timer = 0
             if self.speed_x <= 1.5:  # making sure speed can't get lower than 1
                 self.speed_x = 1

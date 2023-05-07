@@ -2,9 +2,9 @@ import pygame
 from sprites.spoon import Spoon
 from sprites.grass import Grass
 from sprites.dirt import Dirt
+from sprites.slab import Slab
 
 TILESIZE = 64
-
 
 class Level:
     def __init__(self, level):  # temporary placings of spoons onto the level
@@ -44,6 +44,11 @@ class Level:
         self.obstacle_group.add(grass)
         self.everything_group.add(grass)
 
+    def add_slab(self, x, y):  # pylint: disable=invalid-name
+        slab = Slab(x*TILESIZE, y*TILESIZE)
+        self.obstacle_group.add(slab)
+        self.everything_group.add(slab)
+
     def establish_groups(self):
         map_data = self.process_map_data("assets/level")
         for y, row in enumerate(map_data):  # pylint: disable=invalid-name
@@ -55,6 +60,8 @@ class Level:
                         self.add_dirt(x, y)
                     elif col == "3":
                         self.add_spoon(x, y)
+                    elif col == "4":
+                        self.add_slab(x, y)
 
     def draw_level(self, screen):
         for thing in self.everything_group:
