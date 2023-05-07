@@ -38,6 +38,7 @@ class Ghost(pygame.sprite.Sprite):
         self.alive = True
         self.timer = 0 # for speed decay cooldown
         self.flip = False # flipping character direction based on movement
+        self.lives = 3
         self.scroll_area = 450
         self.speed_x = speed
         self.speed_y = 0

@@ -1,6 +1,5 @@
 import pygame
 
-
 class Gameloop:
     """The main game loop.
 
@@ -23,6 +22,7 @@ class Gameloop:
             screen: The game window screen.
             clock: The game clock.
         """
+        self.font = pygame.font.SysFont("Arial", 30)
         self.ghost = ghost
         self.level = level
         self.right = None
@@ -30,6 +30,16 @@ class Gameloop:
         self.running = None
         self.screen = screen
         self.clock = clock
+
+    def draw_info(self):
+        text = self.font.render(f"Lives: {self.ghost.lives}", True, (0,0,0))
+        self.screen.blit(text, (30,30))
+
+        text = self.font.render(f"Speed: {round(self.ghost.speed_x,2)}", True, (0,0,0))
+        self.screen.blit(text, (30,60))
+
+        #text = self.font.render(f"Time: {self.timer//60}s", True, (0,0,0))
+        #self.screen.blit(text, (100,200))
 
     def start(self):
         """Method for starting the game loop.
@@ -55,6 +65,7 @@ class Gameloop:
             self.ghost.update() # decrease speed over time
             self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
                                                    self.ghost.flip, False), self.ghost.rect)
+            self.draw_info()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
