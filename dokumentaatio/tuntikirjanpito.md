@@ -11,5 +11,5 @@
 | 25.4. |   3  | Käyttöohje, release 1, testien laajennus
 | 2.5.  |   7  | Debug, tason scrollaus sivuille, testit, docstring
 | 4.5.  |   2  | Y-suuntainen scrollaus, tason suunnittelu
-| 7.5.  |   2  | Tason suunnittelu ja kehitys
-| summa | 32.5 |
+| 7.5.  |   3  | Tason suunnittelu ja kehitys
+| summa | 33.5 |

@@ -100,7 +100,7 @@ class Ghost(pygame.sprite.Sprite):
         """
         decrease_cooldown = 100
         if self.speed_x > 1 and self.timer >= decrease_cooldown:
-            self.speed_x *= 0.9
+            self.speed_x *= 0.91
             self.timer = 0
             if self.speed_x <= 1.5:  # making sure speed can't get lower than 1
                 self.speed_x = 1
@@ -126,7 +126,7 @@ class Ghost(pygame.sprite.Sprite):
                                      self.rect.width, self.rect.height):  # y
                 if self.speed_y < 0:  # for bumping thy head upon the dastardly roof
                     self.speed_y = 0
-                    delta_y = tile.rect.bottom - self.rect.top
+                    delta_y = tile.rect.bottom - self.rect.top + 0.68
 
                 elif self.speed_y >= 0:  # for planting thy feet on the ground
                     self.speed_y = 0
