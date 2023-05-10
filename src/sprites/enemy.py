@@ -18,7 +18,7 @@ class Enemy(pygame.sprite.Sprite):
     def move(self, obstacles):
         delta_x = 0
         self.check_path(obstacles)
-        self.vision_ground.center=(self.rect.centerx + 64 * self.direction, self.rect.centery + 64)
+        self.vision_ground.center=(self.rect.centerx + 64 * self.direction, self.rect.centery + 40)
         self.vision_walls.center = (self.rect.centerx + 40*self.direction, self.rect.centery)
         delta_x += self.speed * self.direction
         self.rect.x += delta_x

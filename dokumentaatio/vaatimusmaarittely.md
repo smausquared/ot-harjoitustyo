@@ -18,7 +18,7 @@ sekä hyppiä : tehty
 -Hahmo liikkuu aluksi hyvin hitaasti, mutta kerää nopeutta kerätessään
 esineitä ympäristöstä : tehty
 
--Ympäristössä liikkuu yksinkertaisia vihollisia
+-Ympäristössä liikkuu yksinkertaisia vihollisia : tehty
 
 -Tavoite on päästä tason loppuun, jolloin peli päättyy
 

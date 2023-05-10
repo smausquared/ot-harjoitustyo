@@ -38,6 +38,9 @@ class Gameloop:
         text = self.font.render(f"Speed: {round(self.ghost.speed_x,2)}", True, (0,0,0))
         self.screen.blit(text, (30,60))
 
+        text = self.font.render(f"Spoons: {self.ghost.spoon_count}", True, (0,0,0))
+        self.screen.blit(text, (30,90))
+
         #text = self.font.render(f"Time: {self.timer//60}s", True, (0,0,0))
         #self.screen.blit(text, (100,200))
 

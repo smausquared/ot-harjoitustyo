@@ -116,6 +116,9 @@ class Ghost(pygame.sprite.Sprite):
         if self.damage_timer >= 120 and self.lives > 0:
             self.lives -= 1
             self.damage_timer = 0
+        if self.lives <= 0:
+            self.alive = False
+            self.kill()
 
     def check_collision(self, delta_x, delta_y, level):
         """Method for checking the player's collision with the level.
