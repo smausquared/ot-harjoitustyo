@@ -36,7 +36,8 @@ class Ghost(pygame.sprite.Sprite):
                                             (int(0.7*ghost.get_width()),
                                              int(0.7*ghost.get_height())))
         self.alive = True
-        self.timer = 0 # for speed decay cooldown
+        self.speed_timer = 0 # for speed decay cooldown
+        self.damage_timer = 0
         self.flip = False # flipping character direction based on movement
         self.lives = 3
         self.scroll_area = 450
@@ -96,15 +97,24 @@ class Ghost(pygame.sprite.Sprite):
         return (screen_scroll_x, screen_scroll_y)
 
     def update(self):
-        """Method for updating the player's speed over time.
+        """Method for updating the player's speed over time and 
+        controlling how often the player can take damage.
         """
-        decrease_cooldown = 100
-        if self.speed_x > 1 and self.timer >= decrease_cooldown:
+
+        if self.speed_x > 1 and self.speed_timer >= 100:
             self.speed_x *= 0.91
-            self.timer = 0
+            self.speed_timer = 0
             if self.speed_x <= 1.5:  # making sure speed can't get lower than 1
                 self.speed_x = 1
-        self.timer += 1
+        self.damage_timer += 1
+        self.speed_timer += 1
+
+    def take_damage(self):
+        """Function to take damage with an invunerability period shortly after.
+        """
+        if self.damage_timer >= 120 and self.lives > 0:
+            self.lives -= 1
+            self.damage_timer = 0
 
     def check_collision(self, delta_x, delta_y, level):
         """Method for checking the player's collision with the level.
