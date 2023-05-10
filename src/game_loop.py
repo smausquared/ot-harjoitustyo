@@ -60,6 +60,10 @@ class Gameloop:
                 self.level.scroll_y = scroll[1]
 
             self.level.draw_level(self.screen)
+            for enemy in self.level.enemy_group:
+                enemy.move(self.level.obstacle_group)
+                enemy.attack(self.ghost)
+
             for spoon in self.level.spoon_group: # check spoon pickup
                 spoon.update(self.ghost)
             self.ghost.update() # decrease speed over time

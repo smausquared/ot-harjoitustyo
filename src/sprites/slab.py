@@ -31,4 +31,4 @@ class Slab(pygame.sprite.Sprite):
             slab = pygame.image.load("assets/slab.png")
         self.image = slab
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.center = (x, y - self.image.get_height() + 4)

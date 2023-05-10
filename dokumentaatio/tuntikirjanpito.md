@@ -12,4 +12,5 @@
 | 2.5.  |   7  | Debug, tason scrollaus sivuille, testit, docstring
 | 4.5.  |   2  | Y-suuntainen scrollaus, tason suunnittelu
 | 7.5.  |   3  | Tason suunnittelu ja kehitys
+| 10.5. |      | Vihollisten kehitys
 | summa | 33.5 |

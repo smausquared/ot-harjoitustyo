@@ -19,7 +19,7 @@ class Ghost(pygame.sprite.Sprite):
         rect.center: Center of the collision rectangle.
     """
 
-    def __init__(self, x, y, speed):  # pylint: disable=invalid-name
+    def __init__(self, x_coord, y_coord, speed):
         """Constructor of the class.
 
         Args:
@@ -40,13 +40,14 @@ class Ghost(pygame.sprite.Sprite):
         self.damage_timer = 0
         self.flip = False # flipping character direction based on movement
         self.lives = 3
+        self.spoon_count = 0
         self.scroll_area = 450
         self.speed_x = speed
         self.speed_y = 0
         self.jumping = False
         self.in_air = True
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.center = (x_coord, y_coord)
 
     def move(self, right, left, level):
         """Method for handling player movement, checking collision and tracking scrolling.
@@ -118,7 +119,8 @@ class Ghost(pygame.sprite.Sprite):
 
     def check_collision(self, delta_x, delta_y, level):
         """Method for checking the player's collision with the level.
-
+            Incidentally also a great place to check if the player is
+            defeating an enemy by stomping them.
         Args:
             delta_x: Distance of how far the character would wish to move horizontally.
             delta_y: Distance of how far the character would wish to move vertically.
@@ -127,9 +129,9 @@ class Ghost(pygame.sprite.Sprite):
         Returns:
             integer: The delta_x and delta_y-values modified so that if the
             movement approaches a wall, the movement is cut short.
-        """
-        for tile in level.obstacle_group:
-            if tile.rect.colliderect(self.rect.x + delta_x, self.rect.y,
+        """ #                                                   |
+        for tile in level.obstacle_group: # added larger buffer v for x-collision due to bugs
+            if tile.rect.colliderect(self.rect.x + (delta_x + delta_x * 0.2), self.rect.y,
                                      self.rect.width, self.rect.height):  # x
                 delta_x = 0
             if tile.rect.colliderect(self.rect.x, self.rect.y + delta_y,
@@ -142,5 +144,10 @@ class Ghost(pygame.sprite.Sprite):
                     self.speed_y = 0
                     self.in_air = False
                     delta_y = tile.rect.top - self.rect.bottom - 0.68
+
+        for enemy in level.enemy_group:
+            if enemy.rect.colliderect(self.rect.x, self.rect.y + delta_y,
+                                     self.rect.width, self.rect.height) and self.speed_y > 1:
+                enemy.kill()
 
         return delta_x, delta_y

@@ -37,4 +37,7 @@ class Spoon(pygame.sprite.Sprite):
         """
         if pygame.sprite.collide_rect(self, ghost):
             ghost.speed_x += 2.5
+            ghost.spoon_count += 1
+            if ghost.spoon_count % 10 == 0:
+                ghost.lives += 1
             self.kill()
