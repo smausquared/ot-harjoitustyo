@@ -13,4 +13,4 @@
 | 4.5.  |   2  | Y-suuntainen scrollaus, tason suunnittelu
 | 7.5.  |   3  | Tason suunnittelu ja kehitys
 | 10.5. |   4  | Vihollisten kehitys
-| summa | 33.5 |
+| summa | 37.5 |
