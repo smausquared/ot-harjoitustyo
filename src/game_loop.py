@@ -24,6 +24,7 @@ class Gameloop:
             clock: The game clock.
         """
         self.font = pygame.font.SysFont("Arial", 30)
+        self.ghost_original = ghost
         self.ghost = ghost
         self.level = level
         self.right = None
@@ -109,7 +110,7 @@ class Gameloop:
             self.clock.tick(60)
             if self.start_screen:
                 self.handle_start_screen()
-                
+
             elif self.end_screen:
                 pass
             else:
@@ -121,6 +122,9 @@ class Gameloop:
                         self.right, self.left, self.level)
                     self.level.scroll_x = scroll[0]
                     self.level.scroll_y = scroll[1]
+                else:
+                    text = self.font.render("You died! Press R to try again!", True, (0,0,0))
+                    self.screen.blit(text, (400, 500))
 
                 self.level.draw_level(self.screen)
                 for enemy in self.level.enemy_group:
@@ -144,6 +148,9 @@ class Gameloop:
                             self.right = True
                         if event.key == pygame.K_w:
                             self.ghost.jumping = True
+                        if event.key == pygame.K_r:
+                            return True # return True if the player wishes to restart:
+                                        # fulfills while-statement in index.py
 
                     if event.type == pygame.KEYUP:
                         if event.key == pygame.K_a:

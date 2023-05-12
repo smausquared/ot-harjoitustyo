@@ -13,7 +13,8 @@ def main():
 
     pygame.init()
     game_loop = Gameloop(ghost, level, screen, clock)
-    game_loop.start()
+    if game_loop.start(): # restart function!
+        main()
 
 if __name__ == "__main__":
     main()

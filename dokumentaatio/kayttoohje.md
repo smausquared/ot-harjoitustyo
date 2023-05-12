@@ -20,5 +20,5 @@ poetry run invoke start
 
 ## Pelin toiminta
 
-Liikuta kummitusta W-, A- ja D-näppäimillä. Lusikoita keräämällä voit liikkua nopeammin. Voitat pääsemällä tason läpi maaliin esteitä varoen.
+Liikuta kummitusta W-, A- ja D-näppäimillä. Pelin voi aloittaa alusta milloin vain R-näppäimellä. Lusikoita keräämällä voit liikkua nopeammin. Voitat pääsemällä tason läpi maaliin esteitä varoen.
 
