@@ -4,6 +4,7 @@ from sprites.enemy import Enemy
 from sprites.grass import Grass
 from sprites.dirt import Dirt
 from sprites.slab import Slab
+from sprites.water import Water
 
 TILESIZE = 64
 
@@ -16,6 +17,7 @@ class Level:
         self.obstacle_group = pygame.sprite.Group()
         self.enemy_group = pygame.sprite.Group()
         self.everything_group = pygame.sprite.Group()
+        self.water_group = pygame.sprite.Group()
 
     def process_map_data(self, path):
         try:
@@ -56,6 +58,11 @@ class Level:
         self.obstacle_group.add(slab)
         self.everything_group.add(slab)
 
+    def add_water(self, x_coord, y_coord):
+        water = Water(x_coord*TILESIZE,y_coord*TILESIZE)
+        self.water_group.add(water)
+        self.everything_group.add(water)
+
     def establish_groups(self):
         map_data = self.process_map_data("assets/level")
         for y_coord, row in enumerate(map_data):
@@ -71,6 +78,10 @@ class Level:
                         self.add_slab(x_coord, y_coord)
                     elif col == "5":
                         self.add_enemy(x_coord, y_coord)
+
+        for x_coord in range(-100, 300):
+            for y_coord in range(30,40):
+                self.add_water(x_coord,y_coord)
 
     def draw_level(self, screen):
         for thing in self.everything_group:

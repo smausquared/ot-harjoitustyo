@@ -47,7 +47,7 @@ class Gameloop:
         text = self.font.render(f"Spoons: {self.ghost.spoon_count}", True, (0,0,0))
         self.screen.blit(text, (30,90))
 
-        text = self.font.render(f"Time: {self.timer//60}s", True, (0,0,0))
+        text = self.font.render(f"Time: {round(self.timer/60,1)}s", True, (0,0,0))
         self.screen.blit(text, (30,120))
 
     def show_leaderboard(self):
@@ -123,8 +123,10 @@ class Gameloop:
                     self.level.scroll_x = scroll[0]
                     self.level.scroll_y = scroll[1]
                 else:
+                    self.right = False
+                    self.left = False
                     text = self.font.render("You died! Press R to try again!", True, (0,0,0))
-                    self.screen.blit(text, (400, 500))
+                    self.screen.blit(text, (self.ghost.rect.centerx - 100, self.ghost.rect.centery - 100))
 
                 self.level.draw_level(self.screen)
                 for enemy in self.level.enemy_group:
@@ -133,6 +135,10 @@ class Gameloop:
 
                 for spoon in self.level.spoon_group: # check spoon pickup
                     spoon.update(self.ghost)
+
+                for water in self.level.water_group:
+                    water.attack(self.ghost)
+
                 self.ghost.update() # decrease speed over time
                 self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
                                                     self.ghost.flip, False), self.ghost.rect)

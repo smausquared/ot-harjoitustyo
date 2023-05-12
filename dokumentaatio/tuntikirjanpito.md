@@ -13,5 +13,5 @@
 | 4.5.  |   2  | Y-suuntainen scrollaus, tason suunnittelu
 | 7.5.  |   3  | Tason suunnittelu ja kehitys
 | 10.5. |   4  | Vihollisten kehitys
-| 12.5. |   3  | Tehtiin start-menu
-| summa | 40.5 |
+| 12.5. |   5  | Start-menu, reset-nappi, vesi
+| summa | 42.5 |
