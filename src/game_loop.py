@@ -11,6 +11,7 @@ class Gameloop:
         running: To turn the while-loop on or off.
         screen: The game window screen.
         clock: The game clock.
+        timer: How long the player has been playing. Will be used for the leaderboard.
     """
 
     def __init__(self, ghost, level, screen, clock):
@@ -30,6 +31,10 @@ class Gameloop:
         self.running = None
         self.screen = screen
         self.clock = clock
+        self.timer = 0
+        self.start_screen = True
+        self.end_screen = False
+        self.start_menu_button = 0
 
     def draw_info(self):
         text = self.font.render(f"Lives: {self.ghost.lives}", True, (0,0,0))
@@ -41,8 +46,56 @@ class Gameloop:
         text = self.font.render(f"Spoons: {self.ghost.spoon_count}", True, (0,0,0))
         self.screen.blit(text, (30,90))
 
-        #text = self.font.render(f"Time: {self.timer//60}s", True, (0,0,0))
-        #self.screen.blit(text, (100,200))
+        text = self.font.render(f"Time: {self.timer//60}s", True, (0,0,0))
+        self.screen.blit(text, (30,120))
+
+    def show_leaderboard(self):
+        pass
+
+    def handle_start_screen(self):
+        # menu window and cursor
+        self.screen.fill((173, 216, 230))
+        pygame.draw.rect(self.screen, (20,20,20), pygame.Rect(400,200, 600, 600))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(400,200, 600, 600),3)
+
+        text = self.font.render("Use arrow keys and enter to select!", True, (255,255,0))
+        self.screen.blit(text, (450,230))
+
+        text = self.font.render(">", True, (255,255,0))
+        self.screen.blit(text, (530,400 + self.start_menu_button*100))
+
+        # buttons
+        text = self.font.render("START", True, (173, 216, 230))
+        self.screen.blit(text, (650,400))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(630,390, 135, 55),3)
+
+        text = self.font.render("LEADERBOARD", True, (173, 216, 230))
+        self.screen.blit(text, (585, 500))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(565,490, 270, 55),3)
+
+        text = self.font.render("QUIT", True, (173, 216, 230))
+        self.screen.blit(text, (660, 600))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(630,590, 135, 55),3)
+
+        # ugly event handler </3
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    if self.start_menu_button < 2:
+                        self.start_menu_button += 1
+                elif event.key == pygame.K_UP:
+                    if self.start_menu_button > 0:
+                        self.start_menu_button -= 1
+                if event.key == pygame.K_RETURN:
+                    if self.start_menu_button == 0:
+                        self.start_screen = False
+                    elif self.start_menu_button == 1:
+                        self.show_leaderboard()
+                    elif self.start_menu_button == 2:
+                        self.running = False
 
     def start(self):
         """Method for starting the game loop.
@@ -54,44 +107,51 @@ class Gameloop:
 
         while self.running:
             self.clock.tick(60)
-            self.screen.fill((173, 216, 230))
+            if self.start_screen:
+                self.handle_start_screen()
+                
+            elif self.end_screen:
+                pass
+            else:
+                self.screen.fill((173, 216, 230))
+                self.timer += 1
 
-            if self.ghost.alive:
-                scroll = self.ghost.move(
-                    self.right, self.left, self.level)
-                self.level.scroll_x = scroll[0]
-                self.level.scroll_y = scroll[1]
+                if self.ghost.alive:
+                    scroll = self.ghost.move(
+                        self.right, self.left, self.level)
+                    self.level.scroll_x = scroll[0]
+                    self.level.scroll_y = scroll[1]
 
-            self.level.draw_level(self.screen)
-            for enemy in self.level.enemy_group:
-                enemy.move(self.level.obstacle_group)
-                enemy.attack(self.ghost)
+                self.level.draw_level(self.screen)
+                for enemy in self.level.enemy_group:
+                    enemy.move(self.level.obstacle_group)
+                    enemy.attack(self.ghost)
 
-            for spoon in self.level.spoon_group: # check spoon pickup
-                spoon.update(self.ghost)
-            self.ghost.update() # decrease speed over time
-            self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
-                                                   self.ghost.flip, False), self.ghost.rect)
-            self.draw_info()
+                for spoon in self.level.spoon_group: # check spoon pickup
+                    spoon.update(self.ghost)
+                self.ghost.update() # decrease speed over time
+                self.screen.blit(pygame.transform.flip(self.ghost.image, # draw player
+                                                    self.ghost.flip, False), self.ghost.rect)
+                self.draw_info()
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_a:
-                        self.left = True
-                    if event.key == pygame.K_d:
-                        self.right = True
-                    if event.key == pygame.K_w:
-                        self.ghost.jumping = True
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.running = False
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_a:
+                            self.left = True
+                        if event.key == pygame.K_d:
+                            self.right = True
+                        if event.key == pygame.K_w:
+                            self.ghost.jumping = True
 
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_a:
-                        self.left = False
-                    if event.key == pygame.K_d:
-                        self.right = False
-                    if event.key == pygame.K_w and self.ghost.alive:
-                        self.ghost.jumping = False
+                    if event.type == pygame.KEYUP:
+                        if event.key == pygame.K_a:
+                            self.left = False
+                        if event.key == pygame.K_d:
+                            self.right = False
+                        if event.key == pygame.K_w and self.ghost.alive:
+                            self.ghost.jumping = False
 
             pygame.display.update()
 
