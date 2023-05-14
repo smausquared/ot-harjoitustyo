@@ -30,12 +30,23 @@ Kummitus-kuvaa käytetään tekijän Erkki Rytkönen luvalla, Twitter @finnytalk
 poetry install
 ```
 
-4. Aja ohjelma seuraavalla komennolla:
+4. Alusta tallennuksen tietokanta komennolla:
+```bash
+poetry run invoke build
+```
+
+5. Aja ohjelma seuraavalla komennolla:
 ```bash
 poetry run invoke start
 ```
 
 ## Komennot
+
+Tietokannan alustus:
+```bash
+poetry run invoke build
+```
+
 
 Ohjelman ajo:
 
