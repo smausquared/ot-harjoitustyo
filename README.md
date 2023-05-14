@@ -61,3 +61,8 @@ Pylint-virheiden tarkistus:
 poetry run invoke lint
 ```
 
+## Huomioita
+
+Tänään palautuspäivänä labtool on alhaalla. Näin en ole voinut muuttaa projektin nimeä labtoolissa!
+
+Pylint antaa ainakin minun koneella false-positiveja trailing whitespacesta. Muut pylint-virheet tunnustan!
