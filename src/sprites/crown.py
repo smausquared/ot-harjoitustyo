@@ -1,5 +1,6 @@
 import pygame
 
+
 class Crown(pygame.sprite.Sprite):
     """Class for the crown at the end of the game. Picking it up will mean you won!
 
@@ -20,10 +21,10 @@ class Crown(pygame.sprite.Sprite):
         """
         super().__init__()
         try:
-            spoon = pygame.image.load("src/assets/kruunu.png")
+            crown = pygame.image.load("src/assets/kruunu.png")
         except FileNotFoundError:
-            spoon = pygame.image.load("assets/kruunu.png")
-        self.image = spoon
+            crown = pygame.image.load("assets/kruunu.png")
+        self.image = crown
         self.rect = self.image.get_rect()
         self.rect.center = (x_coord, y_coord)
 

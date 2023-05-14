@@ -1,5 +1,6 @@
 import pygame
 
+
 class Spoon(pygame.sprite.Sprite):
     """Class to represent spoons in the game world for the 
     player to pick up to increase their speed.

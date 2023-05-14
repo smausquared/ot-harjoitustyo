@@ -36,9 +36,9 @@ class Ghost(pygame.sprite.Sprite):
                                             (int(0.7*ghost.get_width()),
                                              int(0.7*ghost.get_height())))
         self.alive = True
-        self.speed_timer = 0 # for speed decay cooldown
+        self.speed_timer = 0  # for speed decay cooldown
         self.damage_timer = 0
-        self.flip = False # flipping character direction based on movement
+        self.flip = False  # flipping character direction based on movement
         self.lives = 3
         self.spoon_count = 0
         self.scroll_area = 450
@@ -86,12 +86,12 @@ class Ghost(pygame.sprite.Sprite):
         self.rect.y += delta_y
 
         if self.rect.right > 1400 - self.scroll_area or \
-        self.rect.left <= self.scroll_area: # x scrolling
+                self.rect.left <= self.scroll_area:  # x scrolling
             self.rect.x -= delta_x
             screen_scroll_x = -delta_x
 
         if self.rect.y + self.rect.height//2 > 600 or \
-            self.rect.y - self.rect.height//2 <= 200: # y scrolling
+                self.rect.y - self.rect.height//2 <= 200:  # y scrolling
             self.rect.y -= delta_y
             screen_scroll_y = -delta_y
 
@@ -132,8 +132,8 @@ class Ghost(pygame.sprite.Sprite):
         Returns:
             integer: The delta_x and delta_y-values modified so that if the
             movement approaches a wall, the movement is cut short.
-        """ #                                                   |
-        for tile in level.obstacle_group: # added larger buffer v for x-collision due to bugs
+        """  # |
+        for tile in level.obstacle_group:  # added larger buffer v for x-collision due to bugs
             if tile.rect.colliderect(self.rect.x + (delta_x + delta_x * 0.2), self.rect.y,
                                      self.rect.width, self.rect.height):  # x
                 delta_x = 0
@@ -150,7 +150,7 @@ class Ghost(pygame.sprite.Sprite):
 
         for enemy in level.enemy_group:
             if enemy.rect.colliderect(self.rect.x, self.rect.y + delta_y,
-                                     self.rect.width, self.rect.height) and self.speed_y > 1:
+                                      self.rect.width, self.rect.height) and self.speed_y > 1:
                 enemy.kill()
 
         return delta_x, delta_y

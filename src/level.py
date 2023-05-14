@@ -9,6 +9,7 @@ from sprites.crown import Crown
 
 TILESIZE = 64
 
+
 class Level:
     def __init__(self, level):
         self.level = level
@@ -39,7 +40,7 @@ class Level:
         spoon = Spoon(x_coord*TILESIZE, y_coord*TILESIZE)
         self.spoon_group.add(spoon)
         self.everything_group.add(spoon)
-    
+
     def add_crown(self, x_coord, y_coord):
         crown = Crown(x_coord*TILESIZE, y_coord*TILESIZE)
         self.crown_group.add(crown)
@@ -66,7 +67,7 @@ class Level:
         self.everything_group.add(slab)
 
     def add_water(self, x_coord, y_coord):
-        water = Water(x_coord*TILESIZE,y_coord*TILESIZE)
+        water = Water(x_coord*TILESIZE, y_coord*TILESIZE)
         self.water_group.add(water)
         self.everything_group.add(water)
 
@@ -89,8 +90,8 @@ class Level:
                         self.add_crown(x_coord, y_coord)
 
         for x_coord in range(-100, 300):
-            for y_coord in range(30,40):
-                self.add_water(x_coord,y_coord)
+            for y_coord in range(30, 40):
+                self.add_water(x_coord, y_coord)
 
     def draw_level(self, screen):
         for thing in self.everything_group:

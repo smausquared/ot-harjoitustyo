@@ -1,5 +1,6 @@
 import pygame
 
+
 class Water(pygame.sprite.Sprite):
     """Water at the bottom of the level.
 
@@ -32,7 +33,7 @@ class Water(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x_coord, y_coord)
 
-    def attack(self,ghost):
+    def attack(self, ghost):
         if pygame.sprite.collide_rect(self, ghost):
             ghost.lives = 0
             ghost.take_damage()
