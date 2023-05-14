@@ -78,6 +78,29 @@ class Gameloop:
         self.screen.blit(text, (660, 600))
         pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(630,590, 135, 55),3)
 
+    def handle_end_screen(self):
+        # menu window and cursor
+        self.screen.fill((173, 216, 230))
+        pygame.draw.rect(self.screen, (20,20,20), pygame.Rect(400,200, 600, 600))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(400,200, 600, 600),3)
+
+        text = self.font.render("You win! Submit score to the leaderboard?", True, (255,255,0))
+        self.screen.blit(text, (450,230))
+
+        text = self.font.render(">", True, (255,255,0))
+        self.screen.blit(text, (530,400 + self.start_menu_button*100))
+
+        # buttons
+        text = self.font.render("YES", True, (173, 216, 230))
+        self.screen.blit(text, (585, 400))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(565,490, 270, 55),3)
+
+        text = self.font.render("QUIT", True, (173, 216, 230))
+        self.screen.blit(text, (660, 500))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(630,590, 135, 55),3)
+
+
+
         # ugly event handler </3
 
         for event in pygame.event.get():
@@ -112,7 +135,7 @@ class Gameloop:
                 self.handle_start_screen()
 
             elif self.end_screen:
-                pass
+                self.handle_end_screen()
             else:
                 self.screen.fill((173, 216, 230))
                 self.timer += 1
@@ -126,15 +149,19 @@ class Gameloop:
                     self.right = False
                     self.left = False
                     text = self.font.render("You died! Press R to try again!", True, (0,0,0))
-                    self.screen.blit(text, (self.ghost.rect.centerx - 100, self.ghost.rect.centery - 100))
+                    self.screen.blit(text,
+                                     (self.ghost.rect.centerx - 100, self.ghost.rect.centery - 100))
 
                 self.level.draw_level(self.screen)
                 for enemy in self.level.enemy_group:
                     enemy.move(self.level.obstacle_group)
                     enemy.attack(self.ghost)
 
-                for spoon in self.level.spoon_group: # check spoon pickup
+                for spoon in self.level.spoon_group:
                     spoon.update(self.ghost)
+                
+                for crown in self.level.crown_group:
+                    self.end_screen = crown.update(self.ghost)
 
                 for water in self.level.water_group:
                     water.attack(self.ghost)

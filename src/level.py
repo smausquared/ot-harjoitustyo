@@ -5,6 +5,7 @@ from sprites.grass import Grass
 from sprites.dirt import Dirt
 from sprites.slab import Slab
 from sprites.water import Water
+from sprites.crown import Crown
 
 TILESIZE = 64
 
@@ -14,6 +15,7 @@ class Level:
         self.scroll_x = 0
         self.scroll_y = 0
         self.spoon_group = pygame.sprite.Group()
+        self.crown_group = pygame.sprite.Group()
         self.obstacle_group = pygame.sprite.Group()
         self.enemy_group = pygame.sprite.Group()
         self.everything_group = pygame.sprite.Group()
@@ -37,6 +39,11 @@ class Level:
         spoon = Spoon(x_coord*TILESIZE, y_coord*TILESIZE)
         self.spoon_group.add(spoon)
         self.everything_group.add(spoon)
+    
+    def add_crown(self, x_coord, y_coord):
+        crown = Crown(x_coord*TILESIZE, y_coord*TILESIZE)
+        self.crown_group.add(crown)
+        self.everything_group.add(crown)
 
     def add_enemy(self, x_coord, y_coord):
         enemy = Enemy(x_coord*TILESIZE, y_coord*TILESIZE)
@@ -78,6 +85,8 @@ class Level:
                         self.add_slab(x_coord, y_coord)
                     elif col == "5":
                         self.add_enemy(x_coord, y_coord)
+                    elif col == "6":
+                        self.add_crown(x_coord, y_coord)
 
         for x_coord in range(-100, 300):
             for y_coord in range(30,40):
