@@ -75,7 +75,9 @@ class Gameloop:
         self.screen.blit(text, (450,50))
 
         for i in range(len(self.leaderboard_data)):
-            text = self.font.render(f"{self.leaderboard_data[i][0]}:   {self.leaderboard_data[i][1]}   {self.leaderboard_data[i][2]}s", True, (255,255,0))
+            text = self.font.render \
+            (f"{self.leaderboard_data[i][0]}:   {self.leaderboard_data[i][1]}   {self.leaderboard_data[i][2]}s", \
+             True, (255,255,0))
             self.screen.blit(text, (450,100 + i * 30))
 
         for event in pygame.event.get():
