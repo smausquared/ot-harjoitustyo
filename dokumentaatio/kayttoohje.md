@@ -13,6 +13,11 @@
 poetry install
 ```
 
+4. Alusta ohjelman ajo valmiiksi seuraavalla komennolla:
+```bash
+poetry run invoke build
+```
+
 4. Aja ohjelma seuraavalla komennolla:
 ```bash
 poetry run invoke start
@@ -20,5 +25,5 @@ poetry run invoke start
 
 ## Pelin toiminta
 
-Liikuta kummitusta W-, A- ja D-näppäimillä. Pelin voi aloittaa alusta milloin vain R-näppäimellä. Lusikoita keräämällä voit liikkua nopeammin. Voitat pääsemällä tason läpi maaliin esteitä varoen.
+Liikuta kummitusta W-, A- ja D-näppäimillä. Pelin voi aloittaa alusta milloin vain R-näppäimellä. Lusikoita keräämällä voit liikkua nopeammin. Voitat pääsemällä tason läpi maaliin esteitä varoen ja kaappaamalla kruunun.
 

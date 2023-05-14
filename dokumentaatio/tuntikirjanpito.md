@@ -14,4 +14,5 @@
 | 7.5.  |   3  | Tason suunnittelu ja kehitys
 | 10.5. |   4  | Vihollisten kehitys
 | 12.5. |   5  | Start-menu, reset-nappi, vesi
-| summa | 42.5 |
+| 14.5. |   5  | Kruunu, sqlite-tietokanta, end-ruutu, leaderboard
+| summa | 47.5 |

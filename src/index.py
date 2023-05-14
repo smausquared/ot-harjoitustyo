@@ -13,6 +13,7 @@ def main():
 
     pygame.init()
     game_loop = Gameloop(ghost, level, screen, clock)
+    game_loop.end_screen = True
     if game_loop.start(): # restart function!
         main()
 

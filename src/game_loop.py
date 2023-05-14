@@ -1,4 +1,5 @@
 import pygame
+import sqlite3
 
 class Gameloop:
     """The main game loop.
@@ -30,11 +31,25 @@ class Gameloop:
         self.right = None
         self.left = None
         self.running = None
+        self.completed = False
+        self.endscreentimer = 0
+        self.endscreentimeout = False
         self.screen = screen
+        try:
+            self.db = sqlite3.connect("src/leaderboard.db")
+            self.leaderboard_data = self.db.execute("SELECT RANK() OVER (ORDER BY MIN(score)), \
+                                name, MIN(score) FROM Players GROUP BY id").fetchall()
+        except sqlite3.OperationalError:
+            self.db = sqlite3.connect("leaderboard.db")
+            self.leaderboard_data = self.db.execute("SELECT RANK() OVER (ORDER BY MIN(score)), \
+                                name, MIN(score) FROM Players GROUP BY id").fetchall()
+        self.db.isolation_level = None
+        self.player_name = ""
         self.clock = clock
         self.timer = 0
         self.start_screen = True
         self.end_screen = False
+        self.leaderboard = False
         self.start_menu_button = 0
 
     def draw_info(self):
@@ -51,7 +66,24 @@ class Gameloop:
         self.screen.blit(text, (30,120))
 
     def show_leaderboard(self):
-        pass
+        # window
+        self.screen.fill((173, 216, 230))
+        pygame.draw.rect(self.screen, (20,20,20), pygame.Rect(400,0, 600, 1000))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(400,0, 600, 1000),3)
+
+        text = self.font.render(f"Press ESC to return!", True, (255,255,0))
+        self.screen.blit(text, (450,50))
+
+        for i in range(len(self.leaderboard_data)):
+            text = self.font.render(f"{self.leaderboard_data[i][0]}:   {self.leaderboard_data[i][1]}   {self.leaderboard_data[i][2]}s", True, (255,255,0))
+            self.screen.blit(text, (450,100 + i * 30))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.leaderboard = False
 
     def handle_start_screen(self):
         # menu window and cursor
@@ -77,32 +109,7 @@ class Gameloop:
         text = self.font.render("QUIT", True, (173, 216, 230))
         self.screen.blit(text, (660, 600))
         pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(630,590, 135, 55),3)
-
-    def handle_end_screen(self):
-        # menu window and cursor
-        self.screen.fill((173, 216, 230))
-        pygame.draw.rect(self.screen, (20,20,20), pygame.Rect(400,200, 600, 600))
-        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(400,200, 600, 600),3)
-
-        text = self.font.render("You win! Submit score to the leaderboard?", True, (255,255,0))
-        self.screen.blit(text, (450,230))
-
-        text = self.font.render(">", True, (255,255,0))
-        self.screen.blit(text, (530,400 + self.start_menu_button*100))
-
-        # buttons
-        text = self.font.render("YES", True, (173, 216, 230))
-        self.screen.blit(text, (585, 400))
-        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(565,490, 270, 55),3)
-
-        text = self.font.render("QUIT", True, (173, 216, 230))
-        self.screen.blit(text, (660, 500))
-        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(630,590, 135, 55),3)
-
-
-
-        # ugly event handler </3
-
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -117,9 +124,57 @@ class Gameloop:
                     if self.start_menu_button == 0:
                         self.start_screen = False
                     elif self.start_menu_button == 1:
-                        self.show_leaderboard()
+                        self.leaderboard = True
                     elif self.start_menu_button == 2:
                         self.running = False
+
+    def handle_end_screen(self):
+        self.completed = True
+        # menu window and cursor
+
+        self.screen.fill((173, 216, 230))
+        pygame.draw.rect(self.screen, (20,20,20), pygame.Rect(100,200, 900, 600))
+        pygame.draw.rect(self.screen, (255,255,0), pygame.Rect(100,200, 900, 600),3)
+
+        text = self.font.render\
+        ("You win! Enter your name to submit", True, (255,255,0))
+        self.screen.blit(text, (130,230))
+
+        text = self.font.render("your score to the leaderboard!", True, (255,255,0))
+        self.screen.blit(text, (130,260))
+
+        text = self.font.render("... or press ESC to exit.", True, (255,255,0))
+        self.screen.blit(text, (130,290))
+
+        text = self.font.render(f"{self.player_name}", True, (255,255,0))
+        self.screen.blit(text, (130,400))
+
+        # ugly event handler </3
+        # see line 251 for saving functionality.
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.completed = False
+                self.running = False
+            if event.type == pygame.KEYDOWN:
+                if not self.endscreentimeout:
+                    if event.key == pygame.K_ESCAPE:
+                        self.running = False
+                    elif pygame.key.name(event.key) \
+                    in "abcdefghijklmnopqrstuvwxyzöåä" and len(self.player_name) <= 15:
+                        self.player_name += pygame.key.name(event.key).upper()
+                    elif event.key == pygame.K_BACKSPACE and len(self.player_name) > 0:
+                        self.player_name = self.player_name[:-1]
+                    elif event.key == pygame.K_RETURN and len(self.player_name) > 0:
+                        self.endscreentimeout = True
+
+        if self.endscreentimeout:
+            text = self.font.render \
+            ("Score saved! Thanks for playing!", True, (255,255,0))
+            self.screen.blit(text, (130,460))
+            self.endscreentimer += 1
+            if self.endscreentimer >= 240:
+                self.running = False
 
     def start(self):
         """Method for starting the game loop.
@@ -131,7 +186,11 @@ class Gameloop:
 
         while self.running:
             self.clock.tick(60)
-            if self.start_screen:
+
+            if self.leaderboard:
+                self.show_leaderboard()
+
+            elif self.start_screen:
                 self.handle_start_screen()
 
             elif self.end_screen:
@@ -196,3 +255,5 @@ class Gameloop:
             pygame.display.update()
 
         pygame.quit()
+        if self.completed:
+            self.db.execute("INSERT INTO Players (name, score) VALUES (?, ?)",[self.player_name,(round(self.timer/60,1))])

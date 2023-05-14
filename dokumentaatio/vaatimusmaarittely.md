@@ -20,10 +20,10 @@ esineitä ympäristöstä : tehty
 
 -Ympäristössä liikkuu yksinkertaisia vihollisia : tehty
 
--Tavoite on päästä tason loppuun, jolloin peli päättyy
+-Tavoite on päästä tason loppuun, jolloin peli päättyy : tehty
 
 -Pelin läpäistyään pelaaja voi halutessaan luoda järjestelmään tunnukset,
-jolloin hänen aikansa tallennetaan tulostaululle
+jolloin hänen aikansa tallennetaan tulostaululle : tehty, pelkkä nimi kylläkin!
 
 ## Mahdollinen jatkokehitys
 
