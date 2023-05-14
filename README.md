@@ -15,6 +15,8 @@ tapahtuu W- A- ja D-näppäimillä. Kun pääset tason uloskäynnille, voitat pe
 
 [Arkkitehtuurikuvaus](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](https://github.com/smausquared/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 Kummitus-kuvaa käytetään tekijän Erkki Rytkönen luvalla, Twitter @finnytalks
 
 ## Asennus
